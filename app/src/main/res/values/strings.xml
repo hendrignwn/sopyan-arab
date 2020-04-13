@@ -4,8 +4,24 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+    <string name="next">Lanjut</string>
     <string name="previous">Previous</string>
+    <string name="translate">Terjemahkan</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="open_gallery">Open Gallery</string>
+    <string name="open_image">Buka Gambar</string>
+    <string name="view_image">Hasil Gambar</string>
+    <string name="recognize_text">Proses OCR</string>
+    <string name="reset_all">Atur Ulang</string>
+    <string name="result_copy">Salin Hasil</string>
+    <string name="app_info">Informasi Aplikasi</string>
+    <string name="app_tutorial">Panduan Aplikasi</string>
+    <string name="app_info_description">Aplikasi OCR Translator merupakan aplikasi penerjemah Bahasa Arab - Indonesia yang memanfaatkan Tessearct OCR Engine.\n\nPengguna dapat melakukan penerjemahan bahasa dengan menangkap gambar teks atau tulisan dalam Bahasa Arab menggunakan kamera atau galeri gambar yang sudah ada di galeri tersebut, menggunakan kamera pada perangkat Android.</string>
+
+    <string name="app_tutorial_description_1">1. Pastikan Smartphone Android Anda terhubung ke internet via Wifi atau data.</string>
+    <string name="app_tutorial_description_2">2. Arahkan Smartphone Android Anda terhadap teks tulisan dalam Bahasa Arab</string>
+    <string name="app_tutorial_description_3">3. Atur fokus kamera terhadap teks dalam bahasa arab agar mendapatkan hasil deteksi dan terjemah bahasa yang tepat</string>
+    <string name="app_tutorial_description_4">4. Tekan tombol Proses setelah tangkap kamera atau gambar bahasa arab dalam galeri untuk menghasilkan terjemahan teks yang telah ditangkap</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
