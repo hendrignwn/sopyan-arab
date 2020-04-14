@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.skripsi.arab.datasource.TranslateDataSource
 import com.skripsi.arab.model.TranslateResponse
@@ -143,6 +144,9 @@ class MainActivity : AppCompatActivity() {
             v.isEnabled = false
             val bitmap = (resultImage.drawable as BitmapDrawable).bitmap
             val image = FirebaseVisionImage.fromBitmap(bitmap)
+            val options = FirebaseVisionCloudTextRecognizerOptions.Builder()
+                .setLanguageHints(listOf("ar"))
+                .build()
             val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
 
             detector.processImage(image)
