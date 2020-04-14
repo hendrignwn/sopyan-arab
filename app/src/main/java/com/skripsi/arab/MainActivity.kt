@@ -12,18 +12,18 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.document.FirebaseVisionDocumentText
 import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.skripsi.arab.datasource.TranslateDataSource
 import com.skripsi.arab.model.TranslateResponse
 import com.theartofdev.edmodo.cropper.CropImage
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
@@ -147,18 +147,30 @@ class MainActivity : AppCompatActivity() {
             val options = FirebaseVisionCloudTextRecognizerOptions.Builder()
                 .setLanguageHints(listOf("ar"))
                 .build()
-            val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
-
-            detector.processImage(image)
-                .addOnSuccessListener { firebaseVisionText ->
-                    v.isEnabled = true
-                    processResultText(firebaseVisionText)
+            val recognizer = FirebaseVision.getInstance()
+                .cloudDocumentTextRecognizer
+            recognizer.processImage(image)
+                .addOnSuccessListener { texts ->
+                    v.setEnabled(true)
+                    processCloudTextRecognitionResult(texts)
                 }
-                .addOnFailureListener {
-                    dismissProgress()
-                    v.isEnabled = true
-                    translateText.setText("Failed")
+                .addOnFailureListener { e ->
+                    // Task failed with an exception
+                    v.setEnabled(true)
+                    e.printStackTrace()
                 }
+//            val detector = FirebaseVision.getInstance().getCloudTextRecognizer(options)
+//
+//            detector.processImage(image)
+//                .addOnSuccessListener { firebaseVisionText ->
+//                    v.isEnabled = true
+//                    processResultText(firebaseVisionText)
+//                }
+//                .addOnFailureListener {
+//                    dismissProgress()
+//                    v.isEnabled = true
+//                    translateText.setText("Failed")
+//                }
         } else {
             Toast.makeText(this, "Select an Image First", Toast.LENGTH_LONG).show()
         }
@@ -174,6 +186,34 @@ class MainActivity : AppCompatActivity() {
             val blockText = block.text
             translateText.append(blockText + "\n")
         }
+        dismissProgress()
+    }
+
+    private fun processCloudTextRecognitionResult(text: FirebaseVisionDocumentText) {
+        // Task completed successfully
+        // Replace with code from the codelab to process the cloud text recognition result.
+        // Task completed successfully
+        if (text == null) {
+            show("No text found")
+            return
+        }
+//        graphic_overlay.clear()
+        val blocks = text.blocks
+        for (i in blocks.indices) {
+            val paragraphs = blocks[i].paragraphs
+            for (j in paragraphs.indices) {
+                val words = paragraphs[j].words
+                for (l in words.indices) {
+//                    val cloudDocumentTextGraphic = CloudTextGraphic(
+//                        graphic_overlay,
+//                        words[l]
+//                    )
+//                    graphic_overlay.add(cloudDocumentTextGraphic)
+                    translateText.append(words[l].text + " ")
+                }
+            }
+        }
+
         dismissProgress()
     }
 
